@@ -15,8 +15,14 @@
     <div
       class="h-full min-h-[25vh] w-30 bg-primary-content text-base-100 flex items-start justify-center flex-col gap-2 p-4"
     >
-      <span class="text-lg">Zaloguj się i umów na wizytę</span>
-      <Icon src={ArrowRight} mini class="h-5 w-5 md:h-10" />
+      <span class="text-lg md:text-2xl xl:text-3xl"
+        >Zaloguj się i umów na wizytę</span
+      >
+      <Icon
+        src={ArrowRight}
+        mini
+        class="h-5 w-5 md:h-10 md:w-10 xl:w-20 xl:h-20"
+      />
     </div>
     <div
       class="h-full max-w-md min-h-[25vh] text-primary-content flex items-center justify-center flex-col gap-2 p-4"
