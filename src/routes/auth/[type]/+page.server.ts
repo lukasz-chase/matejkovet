@@ -6,12 +6,18 @@ export const actions = {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
+    if (!email || !password) {
+      return fail(500, {
+        message: "Inputs cant be empty",
+        success: false,
+        email,
+      });
+    }
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
-    console.log(error);
-    console.log(data);
+
     if (error) {
       return fail(500, {
         message: "Server error. Try again later.",
@@ -30,14 +36,20 @@ export const actions = {
     const formData = await request.formData();
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-
+    if (!email || !password) {
+      return fail(500, {
+        message: "Pola nie mogą być puste",
+        success: false,
+        email,
+      });
+    }
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
     if (error) {
       return fail(500, {
-        message: "Server error. Try again later.",
+        message: "Błąd, Spróbuj ponownie później",
         success: false,
         email,
       });

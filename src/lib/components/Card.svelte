@@ -3,15 +3,13 @@
   import { Icon, Star } from "svelte-hero-icons";
 
   export let review: Review;
-  console.log(review);
 </script>
 
 <div
-  class="flex w-[300px] flex-col flex-none bg-primary-content shadow-lg rounded-lg p-4 border border-content-secondary"
+  class="flex w-[200px] h-80 md:h-[26rem] md:w-[300px] flex-col flex-none bg-primary-content shadow-lg rounded-lg p-4 border border-content-secondary"
 >
-  <h2 class="card-title text-xl font-semibold mb-2 text-base-100">
+  <h2 class="card-title text-sm md:text-xl font-semibold mb-2 text-base-100">
     {review.name}
-    {review.surname}
   </h2>
   <img
     src={review.photoURL}
@@ -29,7 +27,7 @@
       />
     {/each}
   </div>
-  <p class="text-base-100 text-sm text-ellipsis overflow-hidden max-w-[250px]">
+  <p class="text-base-100 text-sm text-ellipsis overflow-hidden">
     {review.comment}
   </p>
 </div>

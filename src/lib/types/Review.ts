@@ -6,4 +6,5 @@ export type Review = {
   rating: number;
   surname: string;
   photoURL: string;
+  appointment_id: number;
 };

@@ -36,6 +36,9 @@
       placeholder="Password"
       class="input input-bordered w-full max-w-xs"
     />
+    {#if form?.message}<p class="text-error text-xl uppercase">
+        {form?.message}
+      </p>{/if}
     {#if currentPageType === "login"}
       <button class="btn btn-wide btn-primary" formaction="?/login"
         >Zaloguj się

@@ -33,25 +33,22 @@
 </script>
 
 <Nav {supabase} {session}>
-  <div>
-    <form method="POST" use:enhance={submitUpdateTheme}>
-      {#if colorTheme === "business"}
-        <button
-          class="btn btn-ghost normal-case text-sm px-0 py-0"
-          formaction="/?/setTheme&theme=cupcake&redirectTo={$page.url.pathname}"
-        >
-          <Icon src={Sun} class="h-4 md:h-6" />
-        </button>
-      {:else}
-        <button
-          class="btn btn-ghost normal-case text-sm px-0 py-0"
-          formaction="/?/setTheme&theme=business&redirectTo={$page.url
-            .pathname}"
-        >
-          <Icon src={Moon} mini class="h-4 md:h-6" />
-        </button>
-      {/if}
-    </form>
-  </div>
+  <form method="POST" use:enhance={submitUpdateTheme}>
+    {#if colorTheme === "business"}
+      <button
+        class="btn btn-ghost normal-case text-sm px-0 py-0"
+        formaction="/?/setTheme&theme=cupcake&redirectTo={$page.url.pathname}"
+      >
+        <Icon src={Sun} class="h-4 md:h-6" />
+      </button>
+    {:else}
+      <button
+        class="btn btn-ghost normal-case text-sm px-0 py-0"
+        formaction="/?/setTheme&theme=business&redirectTo={$page.url.pathname}"
+      >
+        <Icon src={Moon} mini class="h-4 md:h-6" />
+      </button>
+    {/if}
+  </form>
 </Nav>
 <slot />
