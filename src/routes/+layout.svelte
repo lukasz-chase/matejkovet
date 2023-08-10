@@ -39,14 +39,14 @@
         class="btn btn-ghost normal-case text-sm px-0 py-0"
         formaction="/?/setTheme&theme=cupcake&redirectTo={$page.url.pathname}"
       >
-        <Icon src={Sun} class="h-6" />
+        <Icon src={Sun} class="h-6 w-6" />
       </button>
     {:else}
       <button
         class="btn btn-ghost normal-case text-sm px-0 py-0"
         formaction="/?/setTheme&theme=business&redirectTo={$page.url.pathname}"
       >
-        <Icon src={Moon} mini class="h-6" />
+        <Icon src={Moon} mini class="h-6 w-6" />
       </button>
     {/if}
   </form>
