@@ -66,7 +66,17 @@
     {/if}
   </div>
 </div> -->
-<div class="navbar bg-base-100">
+<div class="navbar relative bg-base-100">
+  <svg
+    class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-primary"
+    width="250"
+    height="4"
+    viewBox="0 0 250 4"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+  >
+    <path d="M2 2L428 2" stroke-width={2} stroke-linecap="round" />
+  </svg>
   <div class="flex-1">
     <a href="/" class="btn btn-ghost normal-case text-xl">Matejkovet</a>
   </div>
