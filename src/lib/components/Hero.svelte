@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { text } from "@sveltejs/kit";
   import { onMount } from "svelte";
 
   let y: number = 0;
@@ -18,8 +17,6 @@
 
     if (isMobile) {
       scale = 1.5;
-      mobileImagePlacement =
-        container.clientHeight - imgContainer.clientHeight * 1.2;
     }
   });
 
@@ -34,7 +31,7 @@
 <svelte:window bind:scrollY={y} />
 <div
   bind:this={container}
-  class="h-[calc(100vh-3.9rem)] md:h-[calc(100vh-6.4rem)] flex justify-center overflow-hidden relative border-b-2 border-primary"
+  class="h-[70vh] md:h-screen w-full flex justify-center overflow-hidden relative border-b-2 border-primary"
 >
   <div
     bind:this={textContainer}
@@ -52,9 +49,7 @@
     bind:this={imgContainer}
     src="duka-head.png"
     alt="glowa psa"
-    style={`transform: translate3d(0px, ${
-      isMobile ? mobileImagePlacement + y : y
-    }px, 0px) scale(${scale})`}
+    style={`transform: translate3d(0px, ${y}px, 0px) scale(${scale})`}
     class={`absolute z-0 self-center ${
       isMobile ? "scale-150" : "md:scale-105"
     } transition-all ease-linear duration-0`}

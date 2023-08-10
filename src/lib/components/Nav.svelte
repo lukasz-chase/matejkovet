@@ -28,27 +28,29 @@
     <slot />
     {#if session?.user}
       <div class="dropdown dropdown-end">
-        <button class="btn btn-ghost btn-circle normal-case"> Konto </button>
+        <button class="btn btn-ghost btn-circle normal-case text-xl"
+          >Konto</button
+        >
         <ul
           class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
         >
           <li>
             <a
               href={`/user/${session.user.id}/settings`}
-              class="btn btn-ghost normal-case content-center text-sm md:text-xl px-0 py-0"
+              class="btn btn-ghost normal-case content-center text-xl px-0 py-0"
               >Ustawienia</a
             >
           </li>
           <li>
             <a
               href="/appointment"
-              class="btn btn-ghost normal-case content-center text-sm md:text-xl px-0 py-0"
+              class="btn btn-ghost normal-case content-center text-xl px-0 py-0"
               >Wizyta</a
             >
           </li>
           <li>
             <button
-              class="btn btn-ghost normal-case content-center text-sm md:text-xl px-0 py-0 md:p-1"
+              class="btn btn-ghost normal-case content-center text-xl px-0 py-0 md:p-1"
               on:click={handleSignOut}>Wyloguj się</button
             >
           </li>

@@ -9,55 +9,50 @@
   }
 </script>
 
-<div
-  class="h-[calc(100vh-6.5rem)] flex flex-col gap-4 justify-center items-center"
+<h1 class="text-3xl">
+  {#if currentPageType === "login"}
+    Logowanie
+  {:else}
+    Rejestracja
+  {/if}
+</h1>
+<form
+  method="post"
+  use:enhance
+  class="flex flex-col gap-4 items-center justify-center"
 >
-  <h1 class="text-3xl">
-    {#if currentPageType === "login"}
-      Logowanie
-    {:else}
-      Rejestracja
-    {/if}
-  </h1>
-  <form
-    method="post"
-    use:enhance
-    class="flex flex-col gap-4 items-center justify-center"
-  >
-    <input
-      name="email"
-      value={form?.email ?? ""}
-      placeholder="Email"
-      class="input input-bordered w-full max-w-xs"
-    />
-    <input
-      type="password"
-      name="password"
-      placeholder="Password"
-      class="input input-bordered w-full max-w-xs"
-    />
-    {#if form?.message}<p class="text-error text-xl uppercase">
-        {form?.message}
-      </p>{/if}
-    {#if currentPageType === "login"}
-      <button class="btn btn-wide btn-primary" formaction="?/login"
-        >Zaloguj się
-      </button>
-      <p>
-        Nie masz jeszcze konta? <a href="/auth/register" class="text-secondary"
-          >Zarejestruj się</a
-        >
-      </p>
-    {:else}
-      <button
-        class="btn btn-wide btn-primary text-center"
-        formaction="?/register">Zarejestruj się</button
+  <input
+    name="email"
+    value={form?.email ?? ""}
+    placeholder="Email"
+    class="input input-bordered w-full max-w-xs"
+  />
+  <input
+    type="password"
+    name="password"
+    placeholder="Password"
+    class="input input-bordered w-full max-w-xs"
+  />
+  {#if form?.message}<p class="text-error text-xl uppercase">
+      {form?.message}
+    </p>{/if}
+  {#if currentPageType === "login"}
+    <button class="btn btn-wide btn-primary" formaction="?/login"
+      >Zaloguj się
+    </button>
+    <p>
+      Nie masz jeszcze konta? <a href="/auth/register" class="text-secondary"
+        >Zarejestruj się</a
       >
-      <p>
-        Masz już konto? <a href="/auth/login" class="text-secondary"
-          >Zaloguj się</a
-        >
-      </p>
-    {/if}
-  </form>
-</div>
+    </p>
+  {:else}
+    <button class="btn btn-wide btn-primary text-center" formaction="?/register"
+      >Zarejestruj się</button
+    >
+    <p>
+      Masz już konto? <a href="/auth/login" class="text-secondary"
+        >Zaloguj się</a
+      >
+    </p>
+  {/if}
+</form>

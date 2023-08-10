@@ -11,7 +11,7 @@
     const { data: result } = await supabase
       .from("reviews")
       .select("*")
-      .limit(20);
+      .limit(40);
     reviewsLeft = [
       ...result.filter((_: any, index: number) => index % 2 === 0),
     ];
@@ -32,18 +32,21 @@
   <div
     class="flex flex-col h-full justify-center items-center relative overflow-hidden w-3/4"
   >
-    <div class="absolute top-0 md:top-10" on:animationiteration={shiftRight}>
-      <div class="flex gap-4 scrolling-right">
+    <div
+      class="absolute top-0 md:top-10 h-[48%] md:h-[45%]"
+      on:animationiteration={shiftRight}
+    >
+      <div class="flex gap-4 scrolling-right h-full">
         {#each [...reviewsRight] as review, i}
           <Card {review} />
         {/each}
       </div>
     </div>
     <div
-      class="absolute bottom-0 md:bottom-10"
+      class="absolute bottom-0 md:bottom-10 h-[48%] md:h-[45%]"
       on:animationiteration={shiftLeft}
     >
-      <div class="flex gap-4 scrolling-left">
+      <div class="flex gap-4 scrolling-left h-full">
         {#each [...reviewsLeft] as review, i}
           <Card {review} />
         {/each}

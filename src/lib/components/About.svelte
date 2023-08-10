@@ -16,7 +16,7 @@
       class="h-full min-h-[25vh] w-30 bg-primary-content text-base-100 flex items-start justify-center flex-col gap-2 p-4"
     >
       <span class="text-lg md:text-2xl xl:text-3xl"
-        >Zaloguj się i umów na wizytę</span
+        >Poznaj mnie, oraz moje zwierzaki</span
       >
       <Icon
         src={ArrowRight}

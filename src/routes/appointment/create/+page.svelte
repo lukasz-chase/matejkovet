@@ -1,7 +1,6 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
   import FormSuccess from "$lib/components/FormSuccess.svelte";
-  import { DateInput } from "date-picker-svelte";
   import { writable } from "svelte/store";
   import type { SubmitFunction } from "./$types.js";
 
@@ -14,106 +13,107 @@
   let date = today;
 
   $: if (date) {
-    const selectedDate = date.toISOString().split("T")[0];
-    data.getHours(selectedDate).then((hoursFiltered) => {
+    data.getHours(`${date}`).then((hoursFiltered) => {
       hoursFilteredStore.set(hoursFiltered);
     });
   }
 
-  $: dateInputValue = date ? date.toISOString().split("T")[0] : "";
   const createAppointment: SubmitFunction = () => {
     loading = true;
     return async ({ update }) => {
-      console.log(data);
+      loading = false;
       await update();
     };
   };
 </script>
 
-<div
-  class="min-h-[calc(100vh-5rem)] md:min-h-[calc(100vh-15rem)] w-full flex justify-center items-center"
+<form
+  method="post"
+  use:enhance={createAppointment}
+  class="flex flex-col gap-2 mt-4 items-center w-full max-w-2xl"
 >
-  <form
-    method="post"
-    use:enhance={createAppointment}
-    class="flex flex-col gap-4 items-center"
-  >
-    {#if form?.success}
-      <FormSuccess title="Wizyta umówiona!" />
-    {/if}
-    <h1 class="text-3xl">Umów wizytę</h1>
-    <DateInput
+  {#if form?.success}
+    <FormSuccess title="Wizyta umówiona!" />
+  {/if}
+  <div class="form-control w-full p-4">
+    <h1 class="text-3xl self-center">Umów wizytę</h1>
+    <label for="date" class="label">
+      <span class="label-text">Data</span>
+    </label>
+    <input
+      class="input input-bordered w-full"
+      type="date"
+      name="date"
+      min={today.toJSON().slice(0, 10)}
       bind:value={date}
-      min={new Date()}
-      closeOnSelection
-      format="yyyy-MM-dd"
-      class="w-full max-w-xs flex justify-center"
     />
-    <input type="hidden" name="date" value={dateInputValue} />
     {#if $hoursFilteredStore.length !== 0}
-      <div class="form-control w-full p-x-4">
-        <label for="name" class="label">
-          <span class="label-text">Imie</span>
-        </label>
-        <input
-          value={data.userProfile?.first_name ?? form?.firstName ?? ""}
-          name="firstName"
-          type="text"
-          placeholder="imie"
-          class="input input-bordered w-full md:max-w-xs"
-        />
-        <label for="lastName" class="label">
-          <span class="label-text">Nazwisko</span>
-        </label>
-        <input
-          value={data.userProfile?.last_name ?? form?.lastName ?? ""}
-          name="lastName"
-          type="text"
-          placeholder="nazwisko"
-          class="input input-bordered w-full md:max-w-xs mb-2"
-        />
+      <label for="name" class="label">
+        <span class="label-text">Imie</span>
+      </label>
+      <input
+        value={data.userProfile?.first_name ?? form?.firstName ?? ""}
+        name="firstName"
+        type="text"
+        placeholder="imie"
+        class="input input-bordered w-full"
+      />
+      <label for="lastName" class="label">
+        <span class="label-text">Nazwisko</span>
+      </label>
+      <input
+        value={data.userProfile?.last_name ?? form?.lastName ?? ""}
+        name="lastName"
+        type="text"
+        placeholder="nazwisko"
+        class="input input-bordered w-full"
+      />
+      <label for="hour" class="label">
+        <span class="label-text">Godzina</span>
+      </label>
+      <select name="hour" class="select select-bordered w-full">
+        <option disabled selected>Godzina wizyty</option>
+        {#each $hoursFilteredStore as hour}
+          <option>{hour}:00</option>
+        {/each}
+      </select>
 
-        <select name="hour" class="select select-bordered w-full md:max-w-xs">
-          <option disabled selected>Godzina wizyty</option>
-          {#each $hoursFilteredStore as hour}
-            <option>{hour}:00</option>
-          {/each}
-        </select>
+      <label class="label" for="info">
+        <span class="label-text">Dodatkowe uwagi</span>
+      </label>
+      <textarea
+        bind:value={infoText}
+        name="info"
+        class="textarea textarea-bordered h-24"
+        placeholder="Uwagi"
+        maxlength="300"
+      />
+      <label class="label" for="info">
+        <span class="label-text">{infoText.length}/300</span>
+      </label>
 
-        <label class="label" for="info">
-          <span class="label-text">Dodatkowe uwagi</span>
-        </label>
-        <textarea
-          bind:value={infoText}
-          name="info"
-          class="textarea textarea-bordered h-24"
-          placeholder="Uwagi"
-          maxlength="300"
-        />
-        <label class="label" for="info">
-          <span class="label-text">{infoText.length}/300</span>
-        </label>
-      </div>
-      {#if form?.fieldMissing}<p class="text-error text-md my-2">
+      {#if form?.fieldMissing}<p class="text-error text-md">
           {form.fieldMissing}
         </p>{/if}
       {#if form?.supabaseErrorMessage}<p class="text-error text-md">
           {form?.supabaseErrorMessage}
         </p>{/if}
       {#if loading}
-        <span class="loading loading-dots loading-sm" />
+        <span class="loading loading-dots loading-sm self-center" />
       {:else}
         <button
-          class="btn btn-active btn-wide btn-primary mb-2"
+          class="btn btn-active w-full btn-primary mb-2"
           disabled={loading}
         >
           Umów
         </button>
       {/if}
     {:else}
-      <div>
-        <h1>W tym dniu nie ma już dostępnych wizyt</h1>
+      <div class="py-4">
+        <h1 class="text-warning text-lg">
+          W tym dniu nie ma już dostępnych terminów
+        </h1>
       </div>
     {/if}
-  </form>
-</div>
+  </div>
+</form>

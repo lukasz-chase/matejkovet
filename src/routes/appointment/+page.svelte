@@ -5,21 +5,17 @@
   $: ({ session } = data);
 </script>
 
-<div
-  class="h-[calc(100vh-5rem)] md:h-[calc(100vh-15rem)] w-full flex justify-center items-center"
->
-  <div class="flex flex-col gap-4 border-y-2 border-accent p-8">
-    <a
-      class="btn btn-ghost upper-case content-center text-sm md:text-3xl p-4"
-      href="/appointment/create">Umów wizytę</a
-    >
-    <a
-      class="btn btn-ghost upper-case content-center text-sm md:text-3xl p-4"
-      href="/appointment/history/{session?.user.id}">Historia wizyt</a
-    >
-    <a
-      class="btn btn-ghost upper-case content-center text-sm md:text-3xl p-4"
-      href="/appointment/scheduled/{session?.user.id}">Umówione wizyty</a
-    >
-  </div>
+<div class="flex flex-col gap-4 border-y-2 border-accent p-8">
+  <a
+    class="btn btn-ghost upper-case content-center text-sm md:text-3xl p-4"
+    href="/appointment/create">Umów wizytę</a
+  >
+  <a
+    class="btn btn-ghost upper-case content-center text-sm md:text-3xl p-4"
+    href="/appointment/history/{session?.user.id}">Historia wizyt</a
+  >
+  <a
+    class="btn btn-ghost upper-case content-center text-sm md:text-3xl p-4"
+    href="/appointment/scheduled/{session?.user.id}">Umówione wizyty</a
+  >
 </div>

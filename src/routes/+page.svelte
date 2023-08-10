@@ -4,13 +4,11 @@
   import Contact from "$lib/components/Contact.svelte";
   import Rating from "$lib/components/Rating.svelte";
   export let data;
-  let { supabase } = data;
-  $: ({ supabase } = data);
+  let { supabase, session } = data;
+  $: ({ supabase, session } = data);
 </script>
 
-<div>
-  <Hero />
-  <About />
-  <Rating {supabase} />
-  <Contact />
-</div>
+<Hero />
+<About />
+<Rating {supabase} />
+<Contact {session} />

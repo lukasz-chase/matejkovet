@@ -29,7 +29,6 @@ export const actions = {
     const firstName = formData.get("firstName") as string;
     const lastName = formData.get("lastName") as string;
     if (!hour || !firstName || !lastName) {
-      console.log("error");
       return fail(400, {
         lastName,
         firstName,
