@@ -10,6 +10,9 @@
   let infoText = form?.info ?? "";
   let loading = false;
   const today = new Date();
+  let nextMonth = new Date(today);
+  nextMonth.setMonth(today.getMonth() + 1);
+  let maxDate = nextMonth.toJSON().slice(0, 10);
   let date = today;
 
   $: if (date) {
@@ -45,6 +48,7 @@
         type="date"
         name="date"
         min={today.toJSON().slice(0, 10)}
+        max={maxDate}
         bind:value={date}
       />
       {#if $hoursFilteredStore.length !== 0}

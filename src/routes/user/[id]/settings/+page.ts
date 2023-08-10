@@ -1,6 +1,6 @@
 import { supabase } from "$lib/supabaseClient";
 
-export const load = async ({ fetch, data, depends }) => {
+export const load = async ({ data }: { data: any }) => {
   const { data: userProfile } = await supabase
     .from("profiles")
     .select()

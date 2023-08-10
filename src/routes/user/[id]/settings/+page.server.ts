@@ -45,6 +45,7 @@ export const actions = {
         supabaseErrorMessage: profilesError.message,
       });
     }
-    return { success: true };
+
+    return { success: true, firstName, lastName };
   },
 };
