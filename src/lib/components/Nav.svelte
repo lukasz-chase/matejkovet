@@ -8,10 +8,7 @@
   };
 </script>
 
-<!-- 
-<div
-  class="relative mx-8 flex justify-between items-center pt-2 md:pt-12 pb-2 md:pb-6 font-medium md:mx-16 lg:mx-32 text-primary-content"
->
+<div class="navbar relative bg-base-100 px-4">
   <svg
     class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-primary"
     width="250"
@@ -25,14 +22,19 @@
   <div class="flex-1">
     <a href="/" class="btn btn-ghost normal-case text-xl">Matejkovet</a>
   </div>
-  <div class="flex-none flex gap-4">
+  <div class="flex-none gap-2">
     <slot />
+    <div class="form-control" />
     {#if session?.user}
       <div class="dropdown dropdown-end">
-        <button class="btn btn-ghost btn-circle normal-case text-xl"
-          >Konto</button
-        >
+        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+        <!-- svelte-ignore a11y-label-has-associated-control -->
+        <label tabindex="0" class="btn btn-ghost normal-case text-xl px-0">
+          Konto
+        </label>
+        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
         <ul
+          tabindex="0"
           class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
         >
           <li>
@@ -64,51 +66,5 @@
         >logowanie</a
       >
     {/if}
-  </div>
-</div> -->
-<div class="navbar relative bg-base-100">
-  <svg
-    class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-primary"
-    width="250"
-    height="4"
-    viewBox="0 0 250 4"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-  >
-    <path d="M2 2L428 2" stroke-width={2} stroke-linecap="round" />
-  </svg>
-  <div class="flex-1">
-    <a href="/" class="btn btn-ghost normal-case text-xl">Matejkovet</a>
-  </div>
-  <div class="flex-none gap-2">
-    <div class="form-control" />
-    <div class="dropdown dropdown-end">
-      <label tabindex="0" class="btn btn-ghost"> Konto </label>
-      <ul
-        tabindex="0"
-        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-      >
-        <li>
-          <a
-            href={`/user/${session.user.id}/settings`}
-            class="btn btn-ghost normal-case content-center text-xl px-0 py-0"
-            >Ustawienia</a
-          >
-        </li>
-        <li>
-          <a
-            href="/appointment"
-            class="btn btn-ghost normal-case content-center text-xl px-0 py-0"
-            >Wizyta</a
-          >
-        </li>
-        <li>
-          <button
-            class="btn btn-ghost normal-case content-center text-xl px-0 py-0 md:p-1"
-            on:click={handleSignOut}>Wyloguj się</button
-          >
-        </li>
-      </ul>
-    </div>
   </div>
 </div>
