@@ -8,6 +8,7 @@
   };
 </script>
 
+<!-- 
 <div
   class="relative mx-8 flex justify-between items-center pt-2 md:pt-12 pb-2 md:pb-6 font-medium md:mx-16 lg:mx-32 text-primary-content"
 >
@@ -63,5 +64,41 @@
         >logowanie</a
       >
     {/if}
+  </div>
+</div> -->
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+    <a href="/" class="btn btn-ghost normal-case text-xl">Matejkovet</a>
+  </div>
+  <div class="flex-none gap-2">
+    <div class="form-control" />
+    <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost"> Konto </label>
+      <ul
+        tabindex="0"
+        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+      >
+        <li>
+          <a
+            href={`/user/${session.user.id}/settings`}
+            class="btn btn-ghost normal-case content-center text-xl px-0 py-0"
+            >Ustawienia</a
+          >
+        </li>
+        <li>
+          <a
+            href="/appointment"
+            class="btn btn-ghost normal-case content-center text-xl px-0 py-0"
+            >Wizyta</a
+          >
+        </li>
+        <li>
+          <button
+            class="btn btn-ghost normal-case content-center text-xl px-0 py-0 md:p-1"
+            on:click={handleSignOut}>Wyloguj się</button
+          >
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

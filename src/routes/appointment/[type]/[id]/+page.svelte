@@ -89,7 +89,7 @@
     {/each}
   </div>
 {:else}
-  <h1>No appointments</h1>
+  <h1 class="font-bold uppercase text-2xl mb-4">Brak wizyt</h1>
 {/if}
 
 <ReviewModal {form} {showModal} {ratingDate} {session} {appointmentId} />
