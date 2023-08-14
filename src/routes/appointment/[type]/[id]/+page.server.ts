@@ -1,4 +1,4 @@
-import { error, fail } from "@sveltejs/kit";
+import { error, fail, redirect } from "@sveltejs/kit";
 import { PRIVATE_BUCKET_URL } from "$env/static/private";
 import { v4 as uuidv4 } from "uuid";
 
@@ -81,12 +81,13 @@ export const actions = {
         formError: createReviewError.message,
       });
     }
-    const { error: appointmentError } = await supabase
+    const { error: appointmentError, data } = await supabase
       .from("appointments")
       .update({
         review: true,
       })
-      .eq("id", appointmentId);
+      .eq("id", appointmentId)
+      .select();
 
     if (appointmentError) {
       return fail(500, {
@@ -94,6 +95,7 @@ export const actions = {
         formError: appointmentError.message,
       });
     }
-    return { success: true };
+
+    return { success: true, modifiedAppointment: data };
   },
 };

@@ -1,7 +1,8 @@
+import { appointments } from "$lib/store/store";
 import { supabase } from "$lib/supabaseClient";
 import type { Appointment } from "$lib/types/Appointment";
 
-export const load = async ({ params, url }) => {
+export const load = async ({ params, url, depends }) => {
   const start = url.searchParams.get("start") ?? 0;
   const end = url.searchParams.get("end") ?? 10;
   const { type, id } = params;
@@ -35,9 +36,9 @@ export const load = async ({ params, url }) => {
     { length: Math.floor((count ?? 0 - 10) / 10) },
     (_, i) => i + 1
   );
-
+  appointments.set(data ?? []);
+  depends("app:appointments");
   return {
-    appointments: data as Appointment[],
     type,
     appointmentsCount,
   };

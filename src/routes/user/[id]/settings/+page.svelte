@@ -7,7 +7,7 @@
   export let data: PageData;
 </script>
 
-<form method="post" class=" w-fullmd:w-2/4">
+<form method="post" class="w-full p-4 md:w-2/4">
   {#if form?.success}
     <FormSuccess title="ustawienia zmienione pomyślnie" />
   {/if}

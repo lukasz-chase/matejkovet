@@ -1,31 +1,21 @@
 <script lang="ts">
   import ReviewModal from "$lib/components/ReviewModal.svelte";
-  import type { Appointment } from "$lib/types/Appointment";
-
+  import { appointments } from "$lib/store/store";
   import type { PageData } from "./$types";
-  import { writable } from "svelte/store";
 
   export let data: PageData;
   export let form;
-  let {
-    session,
-    appointments: appointmentsDB,
-    type,
-    appointmentsCount,
-    supabase,
-  } = data;
+  let { session, type, appointmentsCount, supabase } = data;
 
   let showModal: boolean = false;
   let ratingDate: string;
   let appointmentId: number;
 
-  const appointments = writable<Appointment[]>(appointmentsDB);
   const date = new Date();
   date.setMonth(date.getMonth() - 1);
   const monthAgo = date.toJSON().slice(0, 10);
   const cancelAppointment = async (id: number) => {
-    const { error } = await supabase.from("appointments").delete().eq("id", id);
-    console.log(error);
+    await supabase.from("appointments").delete().eq("id", id);
     appointments.set($appointments.filter((a) => a.id !== id));
   };
   const showModalHandler = (
@@ -39,7 +29,7 @@
   };
 </script>
 
-{#if data.appointments.length !== 0}
+{#if $appointments.length !== 0}
   <div class="join join-vertical w-full text-center max-w-5xl">
     {#if data.type === "history"}
       <h1 class="font-bold uppercase text-2xl mb-4">Historia wizyt</h1>
@@ -79,7 +69,7 @@
     {/each}
   </div>
   <div class="join">
-    {#each appointmentsCount as count, i}
+    {#each appointmentsCount as _, i}
       <a
         href="/appointment/{type}/{session?.user.id}?start={i * 10}&end={i *
           10 +
@@ -92,4 +82,4 @@
   <h1 class="font-bold uppercase text-2xl mb-4">Brak wizyt</h1>
 {/if}
 
-<ReviewModal {form} {showModal} {ratingDate} {session} {appointmentId} />
+<ReviewModal {form} bind:showModal {ratingDate} {session} {appointmentId} />

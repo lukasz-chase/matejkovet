@@ -27,6 +27,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@splidejs/svelte-splide": "^0.2.9",
     "@supabase/auth-helpers-sveltekit": "^0.9.4",
     "@supabase/supabase-js": "^2.31.0",
     "leaflet": "^1.9.4",

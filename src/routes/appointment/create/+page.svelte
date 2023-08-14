@@ -3,6 +3,7 @@
   import FormSuccess from "$lib/components/FormSuccess.svelte";
   import { writable } from "svelte/store";
   import type { SubmitFunction } from "./$types.js";
+  import { onMount } from "svelte";
 
   export const hoursFilteredStore = writable<number[]>([]);
   export let data;
@@ -13,7 +14,8 @@
   let nextMonth = new Date(today);
   nextMonth.setMonth(today.getMonth() + 1);
   let maxDate = nextMonth.toJSON().slice(0, 10);
-  let date = today;
+  let date: Date | string = today.toJSON().slice(0, 10);
+  let dateContainer: HTMLInputElement;
 
   $: if (date) {
     data.getHours(`${date}`).then((hoursFiltered) => {
@@ -50,6 +52,7 @@
         min={today.toJSON().slice(0, 10)}
         max={maxDate}
         bind:value={date}
+        bind:this={dateContainer}
       />
       {#if $hoursFilteredStore.length !== 0}
         <label for="name" class="label">
@@ -114,8 +117,8 @@
         {/if}
       {:else}
         <div class="py-4">
-          <h1 class="text-warning text-lg">
-            W tym dniu nie ma już dostępnych terminów
+          <h1 class="text-warning text-lg text-center">
+            W dniu {date} nie ma już dostępnych terminów
           </h1>
         </div>
       {/if}
