@@ -18,9 +18,8 @@
       <span class="font-bold">Godziny otwarcia:</span>
       <div class="flex flex-col">
         {#each Object.keys(workingHours) as day}
-          <span class="mt-1">
-            {day.charAt(0).toUpperCase() + day.slice(1)}: {workingHours[day]
-              .open} - {workingHours[day].close}
+          <span class="mt-1 first-letter:uppercase">
+            {day}: {workingHours[day].open} - {workingHours[day].close}
           </span>
         {/each}
       </div>

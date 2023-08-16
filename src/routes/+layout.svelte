@@ -52,7 +52,7 @@
   </form>
 </Nav>
 <div
-  class="min-h-[calc(100vh-3.9rem)] md:min-h-[calc(100vh-6.4rem)] w-full flex flex-col gap-8 items-center justify-center"
+  class="min-h-[calc(100vh-3.9rem)] md:min-h-[calc(100vh-6.4rem)] w-full flex flex-col gap-8 items-center justify-center font-poppins"
 >
   <slot />
 </div>
