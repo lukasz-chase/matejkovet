@@ -1,20 +1,5 @@
+import type { WorkingHours } from "$lib/types/WorkingHours.js";
 import { error, fail } from "@sveltejs/kit";
-
-type WorkingHour = {
-  open: string;
-  close: string;
-};
-
-type WorkingHours = {
-  [day in
-    | "poniedziałek"
-    | "wtorek"
-    | "środa"
-    | "czwartek"
-    | "piątek"
-    | "sobota"
-    | "niedziela"]: WorkingHour;
-};
 
 export const load = async ({ locals: { getSession, supabase }, params }) => {
   const session = await getSession();

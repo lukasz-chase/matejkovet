@@ -1,6 +1,5 @@
 import { appointments } from "$lib/store/store";
 import { supabase } from "$lib/supabaseClient";
-import type { Appointment } from "$lib/types/Appointment";
 
 export const load = async ({ params, url, depends }) => {
   const start = url.searchParams.get("start") ?? 0;
