@@ -30,7 +30,17 @@ export const actions = {
       email,
       password,
     });
+    const { error: profilesError } = await supabase
+      .from("profiles")
+      .upsert({ id: loginData.user.id, role: "user" });
 
+    if (profilesError) {
+      return fail(500, {
+        message: "Błąd, Spróbuj ponownie później",
+        success: false,
+        email,
+      });
+    }
     if (loginData) {
       throw redirect(303, "/");
     }
@@ -53,6 +63,7 @@ export const actions = {
       email,
       password,
     });
+
     if (error) {
       return fail(500, {
         message: "Błąd, Spróbuj ponownie później",

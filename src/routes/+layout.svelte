@@ -10,8 +10,8 @@
   import type { PageData } from "./$types";
 
   export let data: PageData;
-  let { supabase, session, colorTheme } = data;
-  $: ({ supabase, session, colorTheme } = data);
+  let { supabase, session, colorTheme, profile } = data;
+  $: ({ supabase, session, colorTheme, profile } = data);
 
   onMount(() => {
     const {
@@ -32,7 +32,7 @@
   };
 </script>
 
-<Nav {supabase} {session}>
+<Nav {supabase} {session} {profile}>
   <form method="POST" use:enhance={submitUpdateTheme}>
     {#if colorTheme === "business"}
       <button

@@ -19,6 +19,14 @@ export const load = async ({ fetch, data, depends }) => {
   const {
     data: { session },
   } = await supabase.auth.getSession();
+  let profile;
+  if (session) {
+    const { data: userProfile } = await supabase
+      .from("profiles")
+      .select()
+      .eq("id", data.session!.user.id);
+    profile = userProfile![0];
+  }
 
-  return { supabase, session, colorTheme };
+  return { supabase, session, colorTheme, profile };
 };

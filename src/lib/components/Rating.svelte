@@ -20,11 +20,15 @@
     ];
   }
 
-  const shiftLeft = () =>
-    (reviewsLeft = [...reviewsLeft, reviewsLeft.shift()!]);
-  const shiftRight = () =>
-    (reviewsRight = [reviewsRight.pop()!, ...reviewsRight]);
+  const shiftLeft = () => {
+    const shifted = reviewsLeft.shift();
+    reviewsLeft = [...reviewsLeft, shifted!];
+  };
 
+  const shiftRight = () => {
+    const popped = reviewsRight.pop();
+    reviewsRight = [popped!, ...reviewsRight];
+  };
   onMount(loadData);
 </script>
 
@@ -37,7 +41,7 @@
       on:animationiteration={shiftRight}
     >
       <div class="flex gap-4 scrolling-right h-full">
-        {#each [...reviewsRight] as review, i}
+        {#each [...reviewsRight] as review}
           <Card {review} />
         {/each}
       </div>
@@ -47,7 +51,7 @@
       on:animationiteration={shiftLeft}
     >
       <div class="flex gap-4 scrolling-left h-full">
-        {#each [...reviewsLeft] as review, i}
+        {#each [...reviewsLeft] as review}
           <Card {review} />
         {/each}
       </div>

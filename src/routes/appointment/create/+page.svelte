@@ -3,19 +3,16 @@
   import FormSuccess from "$lib/components/FormSuccess.svelte";
   import { writable } from "svelte/store";
   import type { SubmitFunction } from "./$types.js";
-  import { onMount } from "svelte";
+  import CustomDate from "$lib/components/CustomDate.svelte";
 
   export const hoursFilteredStore = writable<number[]>([]);
   export let data;
   export let form;
   let infoText = form?.info ?? "";
   let loading = false;
+
   const today = new Date();
-  let nextMonth = new Date(today);
-  nextMonth.setMonth(today.getMonth() + 1);
-  let maxDate = nextMonth.toJSON().slice(0, 10);
   let date: Date | string = today.toJSON().slice(0, 10);
-  let dateContainer: HTMLInputElement;
 
   $: if (date) {
     data.getHours(`${date}`).then((hoursFiltered) => {
@@ -45,15 +42,7 @@
       <label for="date" class="label">
         <span class="label-text">Data</span>
       </label>
-      <input
-        class="input input-bordered w-full"
-        type="date"
-        name="date"
-        min={today.toJSON().slice(0, 10)}
-        max={maxDate}
-        bind:value={date}
-        bind:this={dateContainer}
-      />
+      <CustomDate bind:date />
       {#if $hoursFilteredStore.length !== 0}
         <label for="name" class="label">
           <span class="label-text">Imie</span>
