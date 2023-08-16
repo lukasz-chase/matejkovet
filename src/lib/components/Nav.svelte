@@ -36,7 +36,7 @@
         <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
         <ul
           tabindex="0"
-          class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52"
+          class="mt-3 z-10 p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52"
         >
           {#if profile.role === "user"}
             <li>
@@ -50,8 +50,7 @@
           <li>
             <a
               href="/appointment"
-              class="btn btn-ghost normal-case content-center text-xl px-0 py-0"
-              >Wizyta</a
+              class="btn normal-case content-center text-xl px-0 py-0">Wizyta</a
             >
           </li>
           <li>

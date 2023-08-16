@@ -32,9 +32,9 @@
 {#if $appointments.length !== 0}
   <div class="join join-vertical w-full text-center max-w-5xl">
     {#if data.type === "history"}
-      <h1 class="font-bold uppercase text-2xl mb-4">Historia wizyt</h1>
+      <h1 class="font-bold uppercase text-2xl my-4">Historia wizyt</h1>
     {:else}
-      <h1 class="font-bold uppercase text-2xl mb-4">Zaplanowane wizyty</h1>
+      <h1 class="font-bold uppercase text-2xl my-4">Zaplanowane wizyty</h1>
     {/if}
     {#each $appointments as appointment}
       <div class="collapse collapse-arrow join-item border border-accent">

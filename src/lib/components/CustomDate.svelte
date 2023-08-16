@@ -8,7 +8,7 @@
 </script>
 
 <input
-  class="input input-bordered w-full mb-4"
+  class="input input-bordered w-full mb-4 self-center"
   type="date"
   name="date"
   min={today.toJSON().slice(0, 10)}

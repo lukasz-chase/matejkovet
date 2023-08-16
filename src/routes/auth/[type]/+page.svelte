@@ -37,7 +37,7 @@
       {form?.message}
     </p>{/if}
   {#if currentPageType === "login"}
-    <button class="btn btn-wide btn-primary" formaction="?/login"
+    <button class="btn w-full btn-primary" formaction="?/login"
       >Zaloguj się
     </button>
     <p>
@@ -46,7 +46,7 @@
       >
     </p>
   {:else}
-    <button class="btn btn-wide btn-primary text-center" formaction="?/register"
+    <button class="btn w-full btn-primary text-center" formaction="?/register"
       >Zarejestruj się</button
     >
     <p>

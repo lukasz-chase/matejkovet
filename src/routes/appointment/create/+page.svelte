@@ -37,7 +37,7 @@
   {#if form?.success}
     <FormSuccess title="Wizyta umówiona!" />
   {:else}
-    <div class="form-control w-full p-4">
+    <div class="form-control justify-center w-full p-4">
       <h1 class="text-3xl self-center">Umów wizytę</h1>
       <label for="date" class="label">
         <span class="label-text">Data</span>
@@ -52,7 +52,7 @@
           name="firstName"
           type="text"
           placeholder="imie"
-          class="input input-bordered w-full"
+          class="input input-bordered w-full self-center"
         />
         <label for="lastName" class="label">
           <span class="label-text">Nazwisko</span>
@@ -88,10 +88,14 @@
           <span class="label-text">{infoText.length}/300</span>
         </label>
 
-        {#if form?.fieldMissing}<p class="text-error text-md">
+        {#if form?.fieldMissing}<p
+            class="text-error text-center my-2 text-md self-center"
+          >
             {form.fieldMissing}
           </p>{/if}
-        {#if form?.supabaseErrorMessage}<p class="text-error text-md">
+        {#if form?.supabaseErrorMessage}<p
+            class="text-error text-center my-2 text-md self-center"
+          >
             {form?.supabaseErrorMessage}
           </p>{/if}
         {#if loading}
