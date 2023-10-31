@@ -1,109 +1,58 @@
 <script lang="ts">
   import type { Review } from "$lib/types/Review";
-  import Card from "./Card.svelte";
   import { onMount } from "svelte";
+  import { Carousel } from "flowbite-svelte";
+  import { slide } from "svelte/transition";
+  import CarouselBottom from "./CarouselBottom.svelte";
 
   export let supabase: any;
-  let reviewsLeft: Review[] = [];
-  let reviewsRight: Review[] = [];
+  let images: any;
+  let reviews: Review[] = [];
+  let review: Review | null = null;
 
   async function loadData() {
-    const { data: result } = await supabase
+    const { data: results } = await supabase
       .from("reviews")
       .select("*")
       .limit(40);
-    reviewsLeft = [
-      ...result.filter((_: any, index: number) => index % 2 === 0),
-    ];
-    reviewsRight = [
-      ...result.filter((_: any, index: number) => index % 2 !== 0),
-    ];
+
+    reviews = results;
+
+    images = results.map((result: Review) => ({
+      ...result,
+      alt: result.name,
+      src: result.photoURL,
+      title: result.name,
+    }));
+    review = images[0];
   }
 
-  const shiftLeft = () => {
-    const shifted = reviewsLeft.shift();
-    reviewsLeft = [...reviewsLeft, shifted!];
-  };
-
-  const shiftRight = () => {
-    const popped = reviewsRight.pop();
-    reviewsRight = [popped!, ...reviewsRight];
-  };
   onMount(loadData);
 </script>
 
-<div class="h-screen w-full flex justify-center items-center">
+{#if images}
   <div
-    class="flex flex-col h-full justify-center items-center relative overflow-hidden w-3/4"
+    class="h-full py-20 w-full flex justify-center items-center border-y-2 border-primary"
   >
     <div
-      class="absolute top-0 md:top-10 h-[48%] md:h-[45%]"
-      on:animationiteration={shiftRight}
+      class="max-w-4xl w-full h-full flex flex-col gap-10 justify-center items-center"
     >
-      <div class="flex gap-4 scrolling-right h-full">
-        {#each [...reviewsRight] as review}
-          <Card {review} />
-        {/each}
-      </div>
-    </div>
-    <div
-      class="absolute bottom-0 md:bottom-10 h-[48%] md:h-[45%]"
-      on:animationiteration={shiftLeft}
-    >
-      <div class="flex gap-4 scrolling-left h-full">
-        {#each [...reviewsLeft] as review}
-          <Card {review} />
-        {/each}
+      <h1 class="text-2xl text-accent">Poznaj opinie naszych gości</h1>
+      <div>
+        <Carousel
+          {images}
+          duration={3000}
+          transition={slide}
+          imgClass="object-contain"
+          class="justify-self-center self-center"
+          on:change={({ detail }) => (review = detail)}
+        />
+        <CarouselBottom {review} />
       </div>
     </div>
   </div>
-</div>
-
-<style>
-  .scrolling-left {
-    animation: scrollLeftSm 20s linear infinite;
-  }
-  .scrolling-right {
-    animation: scrollRightSm 20s linear infinite;
-  }
-  @media (min-width: 768px) {
-    .scrolling-right {
-      animation: scrollRight 20s linear infinite;
-    }
-    .scrolling-left {
-      animation: scrollLeft 20s linear infinite;
-    }
-  }
-  @keyframes scrollRightSm {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(+200px);
-    }
-  }
-  @keyframes scrollRight {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(+300px);
-    }
-  }
-  @keyframes scrollLeftSm {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-200px);
-    }
-  }
-  @keyframes scrollLeft {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-300px);
-    }
-  }
-</style>
+{:else}
+  <div class="h-screen w-full flex justify-center items-center">
+    <span class="loading loading-infinity loading-lg" />
+  </div>
+{/if}
