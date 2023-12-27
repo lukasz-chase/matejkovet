@@ -4,7 +4,7 @@
   export let workingHours: any;
 </script>
 
-<div class="flex flex-col md:flex-row justify-center items-center p-4 gap-12">
+<div class="flex flex-col md:flex-row justify-center items-center pb-4 gap-12">
   <div class="flex flex-col items-start justify-center text-xl gap-2">
     <span> Zadzwoń pod nr: </span>
     <b>+48 123 456 781</b>
@@ -25,7 +25,7 @@
       </div>
     </div>
   </div>
-  <div class="">
+  <div class="w-10/12 overflow-hidden">
     <Map />
   </div>
 </div>

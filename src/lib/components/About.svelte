@@ -8,7 +8,7 @@
   } from "svelte-hero-icons";
 </script>
 
-<div class="lg:h-screen flex justify-center items-center p-4">
+<div class="lg:h-screen bg-base-100 z-10 flex justify-center items-center p-4">
   <div
     class="flex flex-col lg:grid lg:grid-cols-3 lg:grid-rows-2 gap-2 h-full items-center justify-center max-w-6xl overflow-hidden"
   >
